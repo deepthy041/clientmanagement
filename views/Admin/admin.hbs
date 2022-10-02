@@ -1,0 +1,79 @@
+<section class="vh-100" style="background-color: #508bfc;">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+        <div class="card shadow-2-strong" style="border-radius: 1rem;">
+          <form action="admin/admin" method="post">
+
+            <div class="card-body p-5 text-center">
+
+              <h3 class="mb-5">Login </h3>
+              {{#if adminErr}}
+              <p class="text-danger">Invalid username or password </p>
+              {{/if}}
+              <div class="form-outlin mb-4">
+                <input type="email" name="Email" id="Email" placeholder="Email" class="form-control form-control-lg"
+                  onkeyup="validEmail()" />
+                <span id="EMAIL" class="text-danger"></span>
+              </div>
+
+              <div class="form-outlin mb-4">
+                <input type="password" id="Password" placeholder="Password" name="Password"
+                  class="form-control form-control-lg" onkeyup="validPassowrd()" />
+                <span id="PASSWORD" class="text-danger"></span>
+              </div>
+
+              <button class="btn btn-primary btn-lg btn-block" type="submit"
+                onclick="return validation() ">Login</button>
+
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+
+  var errorEmail = document.getElementById('EMAIL')
+  var errorPassword = document.getElementById('PASSWORD')
+
+  function validEmail() {
+    const name = document.getElementById('Email').value
+    if (name == "") {
+      errorEmail.innerHTML = "enter valid emial address"
+      return false
+
+
+    }
+    if (!name.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)) {
+      errorEmail.innerHTML = 'enter a proper email adress'
+      return false
+    }
+
+    errorEmail.innerHTML = null
+    return true
+  }
+
+  function validPassowrd() {
+    const name = document.getElementById('Password').value
+    if (name == "") {
+      errorPassword.innerHTML = "enter a password"
+      return false
+    }
+    if (name.length < 3) {
+      errorPassword.innerHTML = "password should be more than three characters"
+      return false
+    }
+    errorPassword.innerHTML = null
+    return true
+  }
+
+
+  function validation() {
+    if (!validEmail() || !validPassowrd()) {
+      return false
+    }
+    return true
+  }
+</script>

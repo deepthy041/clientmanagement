@@ -1,0 +1,90 @@
+<div class="nav mt-5"
+    style="background-color: #3b71ca; width:90%; height:10vh; margin-left:4rem; justify-content:space-between">
+    <div style="color:aliceblue" class="mt-2 p-2">
+        <h4>WELCOME ADMIN</h4>
+    </div>
+    <div style="margin-top:0.7rem; margin-right:1rem"><a class="btn btn-primary" href="/admin/logout">LOGOUT</a></div>
+</div>
+<div class="container mt-4 ">
+
+
+  {{#each data}}
+    <table class="table table-hover table-primary ">
+        <div class="div ">
+            <thead>
+                <tr>
+                    <th scope="col">ARTICLE ID</th>
+
+                    <th scope="col">CURRENT STATUS</th>
+                    <th scope="col">COMMENTS</th>
+                </tr>
+                 
+            </thead>
+         
+            <tbody>
+                {{this.Name}}
+                {{#each this.detail}}
+                <tr>
+                    <td>{{ARTICLEID}}</td>
+                    <td>{{status}}</td>
+                    <td>
+                        <div class="mb-3">
+                            <p>{{comment}}</p>
+                        </div>
+                    </td>
+                </tr>
+                {{/each}}
+
+
+            </tbody>
+            
+
+
+            </tbody>
+           
+
+    </table>
+     {{/each}}
+</div>
+</div>
+<style>
+    .div {
+        margin-top: 6rem;
+    }
+</style>
+<script>
+    function statusupdate(Id) {
+        console.log(Id)
+        $.ajax({
+
+            url: '/updatestatu/' + Id,
+            method: 'post',
+            success: (response) => {
+                if (response.status)
+                    console.log("llkk")
+                document.getElementById('a' + Id).innerHTML = "YES"
+            }
+        })
+    }
+
+    function commentupdate(Id) {
+        let comment = document.getElementById('b' + Id).value
+        console.log(Id)
+        console.log("vannuuuu")
+        $.ajax({
+
+            url: '/commentstatu/' + Id,
+            method: 'post',
+            data: {
+                Comment: comment
+            },
+            success: (response) => {
+                if (response.status)
+                    console.log("llkk")
+                document.getElementById('a' + Id).innerHTML = "NO"
+
+                document.getElementById('c' + Id).innerHTML = comment
+            }
+        })
+    }
+</script>

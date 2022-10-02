@@ -1,0 +1,134 @@
+<section class="vh-100 bg-image"
+  style="background-image: url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.webp');">
+  <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+    <div class="container h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+          <div class="card" style="border-radius: 15px;">
+            <div class="card-body p-5">
+              <h2 class="text-uppercase text-center mb-5">Create an account</h2>
+
+              <form action="/signup" method="post">
+                {{#if SigninErr}}
+                <p class="text-danger">Email id already existed</p>
+                {{/if}}
+
+                {{#if sign}}
+                <p class="text-danger">email id and password is required</p>
+                {{/if}}
+
+                <div class="form-outlin mb-4">
+
+                  <input type="text" id="Name" placeholder="your name" class="form-control form-control-lg" name="Name"
+                    onkeyup="validName()" />
+
+                  <span id="NAME" class="text-danger"></span>
+                </div>
+
+                <div class="form-outlin mb-4">
+                  <input type="email" id="Email" placeholder="your email" class="form-control form-control-lg"
+                    name="Email" onkeyup="validEmail()" />
+
+                  <span id="EMAIL" class="text-danger"></span>
+                </div>
+
+                <div class="form-outlin mb-4">
+                  <input type="password" id="Password" placeholder="your password" class="form-control form-control-lg"
+                    name="Password" onkeyup="validPassowrd()" />
+
+                  <span id="PASSWORD" class="text-danger"></span>
+                </div>
+
+                <div class="d-flex justify-content-center">
+                  <button type="submit" class="btn btn-success btn-block btn-lg gradient-custom-4 text-body"
+                    onclick="return validation() ">Register</button>
+                </div>
+
+
+              </form>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<style>
+  .gradient-custom-3 {
+
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(to right, rgba(132, 250, 176, 0.5), rgba(143, 211, 244, 0.5));
+
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to right, rgba(132, 250, 176, 0.5), rgba(143, 211, 244, 0.5))
+  }
+
+  .gradient-custom-4 {
+    /* fallback for old browsers */
+
+
+    /* Chrome 10-25, Safari 5.1-6 */
+
+
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to right, rgba(132, 250, 176, 1), rgba(143, 211, 244, 1))
+  }
+</style>
+<script>
+  var errorName = document.getElementById('NAME')
+  var errorEmail = document.getElementById('EMAIL')
+  var errorPassword = document.getElementById('PASSWORD')
+  function validName() {
+    const name = document.getElementById('Name').value;
+    if (name == "") {
+      errorName.innerHTML = 'enter your name'
+      return false
+    }
+    if (!name.match(/^[a-zA-Z]*$/)) {
+      errorName.innerHTML = 'alphabets are only allowed'
+      return false
+    }
+    errorName.innerHTML = null
+    return true
+
+  }
+  function validEmail() {
+    const name = document.getElementById('Email').value
+    if (name == "") {
+      errorEmail.innerHTML = "enter valid emial address"
+      return false
+
+
+    }
+    if (!name.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)) {
+      errorEmail.innerHTML = 'enter a proper email adress'
+      return false
+    }
+
+    errorEmail.innerHTML = null
+    return true
+  }
+
+  function validPassowrd() {
+    const name = document.getElementById('Password').value
+    if (name == "") {
+      errorPassword.innerHTML = "enter a password"
+      return false
+    }
+    if (name.length < 3) {
+      errorPassword.innerHTML = "password should be more than three characters"
+      return false
+    }
+    errorPassword.innerHTML = null
+    return true
+  }
+
+
+  function validation() {
+    if (!validateName() || !validEmail() || !validPassowrd()) {
+      return false
+    }
+    return true
+  }
+</script>
