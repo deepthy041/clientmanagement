@@ -8,7 +8,7 @@ router.get('/', function (req, res, next) {
   if (req.session.adminSignin) {
     res.redirect('/admin/adminhome')
   } else {
-    res.render('admin/admin', { adminErr: req.session.adminErr })
+    res.render('Admin/admin', { adminErr: req.session.adminErr })
     req.session.adminErr = null
   }
 
